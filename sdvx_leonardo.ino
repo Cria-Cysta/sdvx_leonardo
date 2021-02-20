@@ -1,25 +1,25 @@
 /*
+* Modify by Cria_Cysta 
 * By Daniel Tam (daniel@danieltam.net)
 ============ NOTES ============
-This will create a SDVX Controller using an Arduino Leonardo. 
-You will hook up one wire of the button to the Arduino pin and the other to Arduino's ground. When pushed, the button should go to ground.
+The code is for Project Overdrive's hardwares Ver 21B20.
 You will need to download the encoder library and use it in your project for this to work (ww.circuitsathome.com/mcu/reading-rotary-encoder-on-arduino)
 ===============================
 */
 
 // buttons
-#define BT_A 4
-#define BT_B 5
-#define BT_C 6
-#define BT_D 7
-#define FX_L 8
-#define FX_R 9
-#define BT_ST 10
+#define BT_A 2
+#define BT_B 3
+#define BT_C 4
+#define BT_D 5
+#define FX_L 6
+#define FX_R 7
+#define BT_ST 8
 
 // encoders
 #include <Encoder.h>
-Encoder enc1(0, 1);
-Encoder enc2(2, 3);
+Encoder enc1(10, 16);
+Encoder enc2(15, 14);
 float knob1 = 0;
 float knob2 = 0;
 float old_knob1 = 0;
@@ -60,11 +60,11 @@ void loop()
     // if there's a difference in encoder movement from last pass, move the mouse
     if(knob1 < old_knob1)
     {
-      Mouse.move(0, -5);
+      Mouse.move(0, -10);
     }
     else
     {
-      Mouse.move(0, 5);
+      Mouse.move(0, 10);
     }
     
 	// we count the difference in the encoders, but we must not go over arduino's int limit
@@ -88,11 +88,11 @@ void loop()
   {
     if(knob2 > old_knob2)
     {
-      Mouse.move(-5, 0);
+      Mouse.move(-10, 0);
     }
     else
     {
-      Mouse.move(5, 0);
+      Mouse.move(10, 0);
     }
     
     if(knob2 < -255)
